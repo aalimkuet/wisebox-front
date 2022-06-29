@@ -1,23 +1,18 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
+import LinkA from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Logo from "../images/wisebox_logo.png";
-import { fontSize, fontWeight, padding } from "@mui/system";
-import { Button as ButtonA } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import styles from "../styles/site.module.css";
+import logo from "../src/images/wisebox-logo.png";
+import wisebox from "../src/images/Wisebox.png";
 import Image from "next/image";
+import { useFormik } from "formik";
+import { signInSchema } from "../src/validation-schemas/change-password";
+import Link from "next/link";
+import Router from "next/router";
+import { useSnackbar } from "notistack";
 
 function Copyright(props) {
   return (
@@ -36,21 +31,65 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  // const { enqueueSnackbar } = useSnackbar();
 
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: signInSchema,
+    onSubmit: async (values) => {
+      console.log(values);
+      // enqueueSnackbar("Successfully signed in!", {
+      //   variant: "success",
+      // });
+      Router.push("/dashboard");
+      //   try {
+      //     setSaving(true);
+      //     let body = new FormData();
+      //     Object.keys(values).forEach((k) => {
+      //       body.append(k, values[k]);
+      //     });
+      //     const res = await fetch(ApiRoutes.signin, {
+      //       method: "POST",
+      //       body: body,
+      //     });
+      //     const data = await res.json();
+      //     if (!data.status.status) throw new Error(data.status.msg);
+      //     const user = data.user[0];
+      //     dispatch(setUser(user));
+      //     enqueueSnackbar("Successfully signed in!", {
+      //       variant: "success",
+      //     });
+      //     navigate(
+      //       `/dashboard/${user.is_investor === "1" ? "investor" : "investee"}`
+      //     );
+      //     if (nextAction === "meeting") {
+      //       dispatch(openMeetingDialog());
+      //     }
+      //     dispatch(close());
+      //   } catch (e) {
+      //     console.log(e);
+      //     enqueueSnackbar(e.message, {
+      //       variant: "error",
+      //     });
+      //   } finally {
+      //     setSaving(false);
+      //   }
+    },
+  });
+  const hasError = (field) => {
+    return formik.touched[field] && Boolean(formik.errors[field]);
+  };
+  const getError = (field) => {
+    return formik.touched[field] && formik.errors[field];
+  };
   return (
     <Box>
       <Grid container component="main" sx={{ height: "100vh" }}>
-        <CssBaseline />
         <Grid
           item
           xs={false}
@@ -106,7 +145,7 @@ export default function SignInSide() {
             </Typography>
           </Box>
         </Grid>
-        <Grid mt={15} item xs={12} sm={8} md={8}>
+        <Grid mt={7} item xs={12} sm={8} md={8}>
           <Box
             sx={{
               my: 8,
@@ -116,61 +155,85 @@ export default function SignInSide() {
               alignItems: "center",
             }}
           >
-            <Image src={Logo} />
-            <Typography
-              component="h6"
-              variant="subtitle2"
+            <Box
               sx={{
-                color: "#3772FF",
-                fontFamily: "Arial;",
-                fontWeight: "500",
-                borderBottom: "2px solid #E6E8EC",
+                maxWidth: "80.85px",
               }}
+              to="/"
             >
-              LOGIN
-            </Typography>
-            <Form style={{ marginTop: "50px" }}>
-              <Box sx={{ width: "400px" }}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label
-                    style={{
-                      fontWeight: "bold",
-                      fontSize: ".8rem",
-                      color: "#777E90",
-                    }}
-                  >
-                    EMAIL
-                  </Form.Label>
-                  <Form.Control
-                    fullWidth
-                    type="email"
-                    placeholder="Enter Your Email"
-                  />
-                </Form.Group>
-              </Box>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: ".8rem",
-                    color: "#777E90",
+              <Image src={logo} alt="logo" style={{ width: "100%" }} />
+            </Box>
+            <Box
+              sx={{
+                marginTop: "0.5em",
+                maxWidth: "100px",
+              }}
+              to="/"
+            >
+              <Image src={wisebox} alt="logo" style={{ width: "100%" }} />
+            </Box>
+            <Box mt={1}>
+              <Typography
+                component="h6"
+                variant="subtitle2"
+                sx={{
+                  color: "#3772FF",
+                  fontFamily: "Arial;",
+                  fontWeight: "500",
+                  borderBottom: "2px solid #E6E8EC",
+                }}
+              >
+                LOGIN
+              </Typography>
+            </Box>
+            <Box
+              mt={2}
+              component="form"
+              onSubmit={formik.handleSubmit}
+              noValidate
+            >
+              <TextField
+                margin="normal"
+                fullWidth
+                id="email"
+                label="EMAIL"
+                variant="outlined"
+                {...formik.getFieldProps("email")}
+                error={hasError("email")}
+                helperText={getError("email")}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="PASSWORD"
+                type="password"
+                id="txtPassword"
+                autoComplete="password"
+                variant="outlined"
+                {...formik.getFieldProps("password")}
+                error={hasError("password")}
+                helperText={getError("password")}
+              />
+              <div>
+                {/* <UnStyledLink
+                  to="/forgot-password"
+                  sx={{
+                    float: "right",
+                    textDecoration: "underline",
+                    mt: 1,
                   }}
                 >
-                  PASSWORD
-                </Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Enter Your Password"
-                />
-              </Form.Group>
+                  Forgot password
+                </UnStyledLink> */}
+              </div>
               <Button
-                className="myBtn"
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                disabled={false}
+                sx={{ borderRadius: "20px", height: "40px", marginTop: "13px" }}
               >
-                Login
+                Sign In
               </Button>
               <Grid container>
                 <Grid item md={6} xs={6}>
@@ -178,11 +241,24 @@ export default function SignInSide() {
                     Don't have an account?
                   </Typography>
                 </Grid>
-                <Grid ml={8} item md={4} xs={4}>
-                  <Link style={{ fontWeight: "600" }}>Signup for free</Link>
+                <Grid item md={6} xs={6} sx={{ textAlign: "center" }}>
+                  <Link href="/signup">
+                    <span
+                      style={{
+                        fontWeight: "700",
+                        fontSize: "17px",
+                        color: "#3772FF",
+                        "&:hover": {
+                          color: "#000",
+                        },
+                      }}
+                    >
+                      Signup for free
+                    </span>
+                  </Link>
                 </Grid>
               </Grid>
-            </Form>
+            </Box>
           </Box>
         </Grid>
       </Grid>

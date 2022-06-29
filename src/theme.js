@@ -9,6 +9,15 @@ let theme = createTheme({
   p: {
     fontFamily: "'Poppins', sans-serif",
   },
+  MuiButton: {
+    root: {
+      textTransform: "none",
+      padding: "20px",
+    },
+    fullWidth: {
+      maxWidth: "20px",
+    },
+  },
   palette: {
     primary: {
       main: "#3772FF",
