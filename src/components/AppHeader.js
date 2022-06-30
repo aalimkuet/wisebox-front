@@ -8,16 +8,13 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import logo from "../images/wisebox-logo.png";
 import wisebox from "../images/Wisebox.png";
 import Link from "@mui/material/Link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Stack } from "@mui/material";
 
 const pages = [
   {

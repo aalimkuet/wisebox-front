@@ -16,7 +16,20 @@ import peelBadge01 from "../src/images/Peel Badge-1.png";
 import peelBadge02 from "../src/images/Peel Badge-2.png";
 import Image from "next/image";
 
-export default function Dashboard() {
+export const getStaticProps = async () => {
+  const result = await fetch("https://jsonplaceholder.typicode.com/users");
+  const data = await result.json();
+
+  return {
+    props: { todo: data },
+  };
+};
+
+export default function Dashboard({ todo }) {
+  React.useEffect(() => {
+    console.log(todo);
+  }, []);
+
   return (
     <Box pt={5} backgroundColor="#F4F5F6" width={"100%"} height="700px">
       <Card>
