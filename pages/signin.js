@@ -238,7 +238,7 @@ export default function SignInSide() {
               <Grid container>
                 <Grid item md={6} xs={6}>
                   <Typography fontWeight={"600"}>
-                    Don't have an account?
+                    Don&apos;t have an account?
                   </Typography>
                 </Grid>
                 <Grid item md={6} xs={6} sx={{ textAlign: "center" }}>

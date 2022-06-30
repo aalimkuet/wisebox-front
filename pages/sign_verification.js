@@ -12,7 +12,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Logo from "../images/wisebox_logo.png";
+import Logo from "../src/images/wisebox-logo.png";
 import { fontSize, fontWeight, padding } from "@mui/system";
 import Image from "next/image";
 
