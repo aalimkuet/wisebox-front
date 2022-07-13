@@ -1,41 +1,13 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Logo from "../src/images/wisebox-logo.png";
-import { fontSize, fontWeight, padding } from "@mui/system";
+import logo from "../src/images/wisebox-logo.png";
 import { Card, Stack } from "@mui/material";
 import Image from "next/image";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const theme = createTheme();
+import style from "../styles/site.module.css";
 
 export default function EmailValidation() {
   const handleSubmit = (event) => {
@@ -48,9 +20,8 @@ export default function EmailValidation() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Grid container component="main" sx={{ height: "100vh" }}>
-        <CssBaseline />
         <Grid
           item
           xs={false}
@@ -116,7 +87,14 @@ export default function EmailValidation() {
               alignItems: "center",
             }}
           >
-            <Image src={Logo} />
+            <Box
+              sx={{
+                maxWidth: "80.85px",
+              }}
+              to="/"
+            >
+              <Image src={logo} alt="logo" style={{ width: "100%" }} />
+            </Box>
             <Box mt={1}>
               <Typography
                 component="h6"
@@ -158,10 +136,10 @@ export default function EmailValidation() {
               sx={{ mt: 2 }}
             >
               <Stack direction="row" spacing={15}>
-                <Button className="whiteBtn" variant="outlined">
+                <Button className={style.whiteBtn} variant="outlined">
                   Resend
                 </Button>
-                <Button className="myBtn" variant="contained">
+                <Button className={style.myBtn} variant="contained">
                   Continue
                 </Button>
               </Stack>
@@ -170,11 +148,10 @@ export default function EmailValidation() {
                 <Grid item xs></Grid>
                 <Grid item></Grid>
               </Grid>
-              {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </>
   );
 }

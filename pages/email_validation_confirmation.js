@@ -7,30 +7,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Logo from "../src/images/wisebox-logo.png";
+import logo from "../src/images/wisebox-logo.png";
+import vector from "../src/images/Vector.png";
 import { Card, Stack } from "@mui/material";
-import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import Image from "next/image";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const theme = createTheme();
 
 export default function EmailValidationConfirmation() {
   const handleSubmit = (event) => {
@@ -43,9 +23,8 @@ export default function EmailValidationConfirmation() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Grid container component="main" sx={{ height: "100vh" }}>
-        <CssBaseline />
         <Grid
           item
           xs={false}
@@ -111,23 +90,46 @@ export default function EmailValidationConfirmation() {
               alignItems: "center",
             }}
           >
-            <Image src={Logo} />
-
-            <Box mt={10}>
-              <CheckCircleOutlineRoundedIcon
-                sx={{ color: "#3772FF", fontSize: "50px" }}
-              />
+            <Box
+              sx={{
+                maxWidth: "80.85px",
+              }}
+              to="/"
+            >
+              <Image src={logo} alt="logo" style={{ width: "100%" }} />
             </Box>
-            <Box mt={1}>
+            <Box
+              mt={15}
+              sx={{
+                maxWidth: "45px",
+              }}
+              to="/"
+            >
+              <Image src={vector} alt="logo" style={{ width: "100%" }} />
+            </Box>
+            <Box mt={1}  >
               <Typography
-                variant="h2"
+                variant="h3"
                 sx={{
-                  color: "#3772FF",
-                  fontWeight: "300 !important",
+                  color: "#2955BF",
+                  fontWeight: "300",
                   fontSize: "48px",
                 }}
               >
-                Your account is ready!
+                Your account
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                variant="h3"
+                sx={{
+                  color: "#2955BF",
+                  fontWeight: "300",
+                  fontSize: "48px",
+                }}
+              >
+                {" "}
+                is ready!
               </Typography>
             </Box>
             <Box mt={1}>
@@ -144,6 +146,6 @@ export default function EmailValidationConfirmation() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </>
   );
 }
