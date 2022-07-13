@@ -58,7 +58,7 @@ export default function Dashboard({ todo }) {
                 <span style={{ marginLeft: "7px", marginTop: "5px" }}>
                   <AddIcon sx={{ fontSize: "21px" }} />
                 </span>
-              </Button>     
+              </Button>
             </Box>
           </CardContent>
         </Card>
@@ -102,9 +102,14 @@ export default function Dashboard({ todo }) {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid item md={1} xs={1}>
-                <Box>
-                  <Image src={peelBadge01} />
+              <Grid item md={2} xs={2}>
+                <Box
+                  ml={7}
+                  sx={{
+                    maxWidth: "80.85px",
+                  }}
+                >
+                  <Image src={peelBadge01} style={{ width: "80%" }} />
                 </Box>
               </Grid>
               <Grid item md={8} xs={12}>
@@ -156,9 +161,14 @@ export default function Dashboard({ todo }) {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid item md={1} xs={1}>
-                <Box>
-                  <Image src={peelBadge02} />
+              <Grid item md={2} xs={2}>
+                <Box
+                  ml={7}
+                  sx={{
+                    maxWidth: "80.85px",
+                  }}
+                >
+                  <Image src={peelBadge02} style={{ width: "80%" }} />
                 </Box>
               </Grid>
               <Grid item md={8} xs={12}>
