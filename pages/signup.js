@@ -1,86 +1,83 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import logo from "../src/images/wisebox-logo.png";
 import wisebox from "../src/images/Wisebox.png";
 import Image from "next/image";
 import { useFormik } from "formik";
-import { signInSchema } from "../src/validation-schemas/change-password";
+import { signupSchema } from "../src/validation-schemas/signup";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import ApiRoute from "../src/api-routes";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Select,
+} from "@mui/material";
+export const getStaticProps = async () => {
+  // const res = await fetch(ApiRoute.countryList);
+  const countryList = [{}]; //await res.json();
+  return { props: { countryList } };
+};
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        www.wisebox.com
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-export default function SignInSide() {
+export default function SignInSide({ countryList }) {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => {
+    if (showPassword) {
+      setShowPassword(false);
+    } else {
+      setShowPassword(true);
+    }
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const formik = useFormik({
     initialValues: {
-      username: "",
+      firstName: "",
+      lastName: "",
+      country: "",
+      city: "",
+      state: "",
+      phoneCode: "",
+      phone: "",
+      email: "",
       email: "",
       password: "",
     },
-    validationSchema: null,
+    validationSchema: signupSchema,
     onSubmit: async (values) => {
       console.log(values);
       // enqueueSnackbar("Successfully signed in!", {
       //   variant: "success",
       // });
-      Router.push("/dashboard");
-      //   try {
-      //     setSaving(true);
-      //     let body = new FormData();
-      //     Object.keys(values).forEach((k) => {
-      //       body.append(k, values[k]);
-      //     });
-      //     const res = await fetch(ApiRoutes.signin, {
-      //       method: "POST",
-      //       body: body,
-      //     });
-      //     const data = await res.json();
-      //     if (!data.status.status) throw new Error(data.status.msg);
-      //     const user = data.user[0];
-      //     dispatch(setUser(user));
-      //     enqueueSnackbar("Successfully signed in!", {
-      //       variant: "success",
-      //     });
-      //     navigate(
-      //       `/dashboard/${user.is_investor === "1" ? "investor" : "investee"}`
-      //     );
-      //     if (nextAction === "meeting") {
-      //       dispatch(openMeetingDialog());
-      //     }
-      //     dispatch(close());
-      //   } catch (e) {
-      //     console.log(e);
-      //     enqueueSnackbar(e.message, {
-      //       variant: "error",
-      //     });
-      //   } finally {
-      //     setSaving(false);
-      //   }
+      //Router.push("/dashboard");
+      try {
+        //setSaving(true);
+        let body = new FormData();
+        Object.keys(values).forEach((k) => {
+          body.append(k, values[k]);
+        });
+        const res = await fetch(ApiRoute.signup, {
+          method: "POST",
+          body: body,
+        });
+        const data = await res.json();
+      } catch (e) {
+        console.log(e);
+        enqueueSnackbar(e.message, {
+          variant: "error",
+        });
+      } finally {
+      }
     },
   });
   const hasError = (field) => {
@@ -238,7 +235,22 @@ export default function SignInSide() {
                 sm={12}
                 lg={8}
               >
-                <TextField
+                <FormControl fullWidth>
+                  <InputLabel>Country</InputLabel>
+                  <Select {...formik.getFieldProps("country")}>
+                    <MenuItem> Select Country</MenuItem>
+                    {countryList.map((result) => (
+                      <MenuItem
+                        title={result.name}
+                        value={result.name}
+                        key={result.code}
+                      >
+                        {result.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                {/* <TextField
                   margin="normal"
                   fullWidth
                   label="COUNTRY"
@@ -247,7 +259,7 @@ export default function SignInSide() {
                   {...formik.getFieldProps("country")}
                   error={hasError("country")}
                   helperText={getError("country")}
-                />
+                /> */}
               </Grid>
               <Grid
                 sx={{
@@ -309,7 +321,23 @@ export default function SignInSide() {
                   helperText={getError("email")}
                 />
               </Grid>
-              <Grid item md={1} xs={6} sm={6} lg={1}>
+              <Grid mt={2} item md={2} xs={6} sm={6} lg={2}>
+                <FormControl fullWidth>
+                  <InputLabel>Code</InputLabel>
+                  <Select {...formik.getFieldProps("phoneCode")}>
+                    <MenuItem> Select Code</MenuItem>
+                    {countryList.map((result) => (
+                      <MenuItem
+                        title={result.dial_code}
+                        value={result.dial_code}
+                        key={result.code}
+                      >
+                        {result.code + "(" + result.dial_code + ")"}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                {/*                 
                 <TextField
                   margin="normal"
                   fullWidth
@@ -319,9 +347,9 @@ export default function SignInSide() {
                   {...formik.getFieldProps("phoneCode")}
                   error={hasError("phoneCode")}
                   helperText={getError("phoneCode")}
-                />
+                /> */}
               </Grid>
-              <Grid item md={3} xs={6} sm={6} lg={3}>
+              <Grid item md={2} xs={6} sm={6} lg={2}>
                 <TextField
                   margin="normal"
                   fullWidth
@@ -346,7 +374,32 @@ export default function SignInSide() {
                 sm={12}
                 lg={8}
               >
-                <TextField
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel fullWidth htmlFor="outlined-adornment-password">
+                    PASSWORD
+                  </InputLabel>
+                  <OutlinedInput
+                    type={showPassword ? "text" : "password"}
+                    {...formik.getFieldProps("password")}
+                    error={hasError("password")}
+                    helperText={getError("password")}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="PASSWORD"
+                  />
+                </FormControl>
+
+                {/* <TextField
                   margin="normal"
                   fullWidth
                   label="PASSWORD"
@@ -355,7 +408,7 @@ export default function SignInSide() {
                   {...formik.getFieldProps("password")}
                   error={hasError("password")}
                   helperText={getError("password")}
-                />
+                /><VisibilityOutlinedIcon/> */}
               </Grid>
               <Grid
                 sx={{

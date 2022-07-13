@@ -11,6 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../images/wisebox-logo.png";
+import avatar from "../images/avatar.png";
 import wisebox from "../images/Wisebox.png";
 import Link from "@mui/material/Link";
 import Image from "next/image";
@@ -168,7 +169,7 @@ const AppHeader = () => {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Wisebox">
-                  <Image src={logo}></Image>{" "}
+                  <Image src={avatar}></Image>{" "}
                 </Avatar>
               </IconButton>
             </Tooltip>

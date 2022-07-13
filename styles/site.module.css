@@ -16,10 +16,10 @@
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 .myBtn {
-  border-radius: 20px !important;
-  height: 40px !important;
-  background-color: #3772FF !important;
-  text-transform: none !important;
+  border-radius: 20px;
+  height: 40px;
+  background-color: #3772FF;
+  text-transform: none;
 }
 .whiteBtn{
   border-radius: 24px !important;
