@@ -44,15 +44,16 @@ export default function Dashboard({ todo }) {
               alignItems: "flex-start",
             }}
           >
-            <Box ml="156px">
+            <Box sx={{ ml: { md: 20, xs: 0 } }}>
               <Typography variant="h4">Welcome Back Shadman</Typography>
             </Box>
-            <Box mr="156px">
+            <Box sx={{ mr: { md: 18, xs: 0 } }}>
               <Button
                 className={style.myBtn}
                 variant="contained"
                 type="submit"
                 fullWidth
+                sx={{ fontSize: { md: ".875rem", xs: ".675rem" } }}
               >
                 Add Property{" "}
                 <span style={{ marginLeft: "7px", marginTop: "5px" }}>
@@ -62,29 +63,21 @@ export default function Dashboard({ todo }) {
             </Box>
           </CardContent>
         </Card>
-
-        <Box ml="176px" mt={4} mb={2}>
+        <Box sx={{ ml: { md: 22, xs: 2 }, mt: 4, mb: 2 }}>
           <Typography variant="body2">Account Overview</Typography>
         </Box>
         <Card
           sx={{
-            width: "78%",
-            height: "120px",
-            ml: "176px",
+            width: { md: "80%", xs: "100%" },
+            height: { md: "7.5em", xs: "10rem" },
+            ml: { md: 22, xs: 0 },
             borderRadius: "8px",
           }}
         >
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-            }}
-          >
+          <CardContent>
             <Grid container spacing={1}>
               <Grid item md={1} xs={1}>
-                <Box pl={5}>
+                <Box sx={{ pl: { md: 5, xs: 0 } }}>
                   <Avatar sx={{ backgroundColor: "rgba(55, 114, 255, 0.1)" }}>
                     <Image src={propertyIcon01} style={{ width: "100%" }} />
                   </Avatar>
@@ -92,7 +85,7 @@ export default function Dashboard({ todo }) {
               </Grid>
               <Grid item md={9} xs={9}>
                 {" "}
-                <Box mt={1}>
+                <Box mt={1} sx={{ mt: 1, ml: { md: 0, xs: 3 } }}>
                   <Typography
                     variant="body1"
                     fontWeight={"bold"}
@@ -104,8 +97,8 @@ export default function Dashboard({ todo }) {
               </Grid>
               <Grid item md={2} xs={2}>
                 <Box
-                  ml={7}
                   sx={{
+                    ml: { md: 7, xs: 0 },
                     maxWidth: "80.85px",
                   }}
                 >
@@ -113,7 +106,7 @@ export default function Dashboard({ todo }) {
                 </Box>
               </Grid>
               <Grid item md={8} xs={12}>
-                <Box sx={{ pl: "95px" }}>
+                <Box sx={{ pl: { md: 12, xs: 0 } }}>
                   <Typography variant="caption" color="#353945">
                     3rd Floor, House 67, Road 14, Sector 7 Uttara Model Town,
                     Dhaka 1214
@@ -124,12 +117,12 @@ export default function Dashboard({ todo }) {
           </CardContent>
         </Card>
 
-        <Card
+        {/* <Card
           sx={{
             mt: "10px",
-            width: "78%",
+            width: { md: "80%", xs: "100%" }, //"78%",
             height: "120px",
-            ml: "176px",
+            ml: { md: 22, sx: 2 },
             borderRadius: "8px",
           }}
         >
@@ -180,7 +173,7 @@ export default function Dashboard({ todo }) {
               </Grid>
             </Grid>
           </CardContent>
-        </Card>
+        </Card> */}
       </Box>
     </>
   );
