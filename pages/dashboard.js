@@ -34,7 +34,7 @@ export default function Dashboard({ todo }) {
   return (
     <>
       <AppHeader></AppHeader>
-      <Box mt={0.5} backgroundColor="#F4F5F6" width={"100%"} height="700px">
+      <Box mt={0.5} backgroundColor="#F4F5F6" width={"100%"} >
         <Card>
           <CardContent
             sx={{
