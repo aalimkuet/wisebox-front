@@ -15,7 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
      
-      {/* <SignInSide /> */}
+       <SignInSide /> 
       {/* <AppHeader></AppHeader> */}
       {/* <Box>
         <Typography variant="h4" sx={{ fontWeight: "bold", textAlign: "center", marginTop: "50px" }}>
